@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^8.56.0",
+    "@tokens-studio/types": "^0.4.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/prompts": "^2.4.9",
     "eslint": "^8.56.0",
