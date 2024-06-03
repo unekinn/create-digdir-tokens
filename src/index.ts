@@ -2,7 +2,11 @@ import path from "node:path";
 import fs from "node:fs/promises";
 import { bold, dim, red, green } from "kleur";
 import prompts, { Choice, Options } from "prompts";
-import { normalizeTokenSetName, toValidPackageName } from "./utils.js";
+import {
+  getOutputFolderName,
+  normalizeTokenSetName,
+  toValidPackageName,
+} from "./utils.js";
 import generateMetadata from "../template/template-files/design-tokens/$metadata.json.js";
 import generateThemes from "../template/template-files/design-tokens/$themes.json.js";
 import packageJsonTemplate from "../template/template-files/package.json";
@@ -278,7 +282,7 @@ Will now create the following:
   packageJsonTemplate.name = packageName;
   packageJsonTemplate.main = packageJsonTemplate.main.replace(
     "<default-theme>",
-    normalizeTokenSetName(defaultTheme)
+    getOutputFolderName(defaultTheme)
   );
   await fs.writeFile(
     path.join(TARGET_DIR, "package.json"),
@@ -294,8 +298,8 @@ function isValidThemeName(themes: string[], value: string): true | string {
   if (themes.includes(s)) {
     return "Theme names must be unique.";
   }
-  if (/\//i.test(s)) {
-    return 'Theme name cannot contain the "/" character.';
+  if (/[^a-zæøå0-9 _-]/i.test(s)) {
+    return "Theme name can only contain letters, numbers, dashes and underscores.";
   }
   return true;
 }

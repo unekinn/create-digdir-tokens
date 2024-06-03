@@ -1,9 +1,12 @@
 import { kebabCase } from "change-case";
 
 export function normalizeTokenSetName(name: string): string {
-  // TODO: This doesn't quite match the output from `npx @digdir/designsystemet tokens`
-  // when it comes to the folder structure of the output directory
   return kebabCase(name);
+}
+
+export function getOutputFolderName(name: string): string {
+  // This needs to match the output from `npx @digdir/designsystemet tokens`
+  return name.toLowerCase();
 }
 
 export function toValidPackageName(projectName: string) {
