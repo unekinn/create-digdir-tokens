@@ -1,6 +1,6 @@
 # Design tokens for @digdir/designsystemet
 
-Getting started:
+## Getting started
 
 ```
 npm install
