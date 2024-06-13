@@ -10,7 +10,7 @@ import {
 import generateMetadata from "../template/template-files/design-tokens/$metadata.json.js";
 import generateThemes from "../template/template-files/design-tokens/$themes.json.js";
 import packageJsonTemplate from "../template/template-files/package.json";
-import { printNextSteps } from "./printNextSteps.js";
+import { nextStepsMarkdown } from "./nextStepsMarkdown.js";
 
 const DEFAULT_FILES_PATH = path.join(__dirname, "../template/default-files");
 
@@ -288,8 +288,20 @@ Will now create the following:
     JSON.stringify(packageJsonTemplate, undefined, 2)
   );
 
+  const readmePath = path.join(TARGET_DIR, "README.md");
+  const currentReadme = await fs.readFile(readmePath);
+  await fs.writeFile(
+    readmePath,
+    [
+      currentReadme.toString("utf-8"),
+      nextStepsMarkdown(themes, modes, TOKENS_TARGET_DIR, packageName),
+    ].join("\n")
+  );
+
   console.log("🎉 Files successfully generated!");
-  console.log(printNextSteps(themes, modes, TOKENS_TARGET_DIR, packageName));
+  console.log(
+    `Read about the next steps in the generated README at ${readmePath}`
+  );
 }
 
 function isValidThemeName(themes: string[], value: string): true | string {
