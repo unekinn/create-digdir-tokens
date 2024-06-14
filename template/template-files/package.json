@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "CSS variables for @digdir/designsystemet",
   "type": "module",
-  "main": "dist/<default-theme>/light.css",
+  "main": "dist/<default-theme>.css",
   "files": [
     "dist"
   ],
@@ -17,7 +17,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@digdir/designsystemet": "^0.1.0-alpha.2",
+    "@digdir/designsystemet": "^0.1.0-alpha.7",
     "rimraf": "^5.0.7"
   }
 }
