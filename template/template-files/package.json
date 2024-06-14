@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "CSS variables for @digdir/designsystemet",
   "type": "module",
-  "main": "dist/<default-theme>.css",
+  "main": "dist/<default-theme>",
   "files": [
     "dist"
   ],

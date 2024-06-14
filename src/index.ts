@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import { bold, dim, red, green } from "kleur";
 import prompts, { Choice, Options } from "prompts";
 import {
-  getOutputFolderName,
+  toGeneratedCssFileName,
   normalizeTokenSetName,
   toValidPackageName,
 } from "./utils.js";
@@ -20,7 +20,7 @@ const TOKEN_TEMPLATE_FILES_PATH = path.join(
 );
 
 const targetArg = process.argv[2] ?? ".";
-export const TARGET_DIR = path.resolve(process.cwd(), targetArg);
+const TARGET_DIR = path.resolve(process.cwd(), targetArg);
 const initialPackageName = toValidPackageName(path.basename(TARGET_DIR));
 
 const MODES = ["Light", "Dark", "Contrast"] as const;
@@ -281,7 +281,7 @@ Will now create the following:
   packageJsonTemplate.name = packageName;
   packageJsonTemplate.main = packageJsonTemplate.main.replace(
     "<default-theme>",
-    getOutputFolderName(defaultTheme)
+    toGeneratedCssFileName(defaultTheme)
   );
   await fs.writeFile(
     path.join(TARGET_DIR, "package.json"),
@@ -294,7 +294,7 @@ Will now create the following:
     readmePath,
     [
       currentReadme.toString("utf-8"),
-      nextStepsMarkdown(themes, modes, TOKENS_TARGET_DIR, packageName),
+      nextStepsMarkdown(themes, modes, tokensDir, packageName),
     ].join("\n")
   );
 

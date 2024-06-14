@@ -4,9 +4,9 @@ export function normalizeTokenSetName(name: string): string {
   return kebabCase(name);
 }
 
-export function getOutputFolderName(name: string): string {
+export function toGeneratedCssFileName(name: string): string {
   // This needs to match the output from `npx @digdir/designsystemet tokens`
-  return name.toLowerCase();
+  return `${name.toLowerCase()}.css`;
 }
 
 export function toValidPackageName(projectName: string) {
